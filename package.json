@@ -1,6 +1,6 @@
 {
   "name": "ter-localization-cli",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Quick and powerful library for localization for react / react native application",
   "scripts": {
     "start": "yarn build && node ./dist/server/index.js",
