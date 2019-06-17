@@ -63,6 +63,8 @@
     "react-select": "^2.4.2",
     "reactstrap": "^6.5.0",
     "simple-line-icons": "^2.4.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "string-template": "^1.0.0",
     "ter-request-wrapper": "^0.2.19"
   },
