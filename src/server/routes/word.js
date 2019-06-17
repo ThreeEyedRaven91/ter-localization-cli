@@ -1,11 +1,13 @@
 import express from 'express';
 import Helper from '../../helpers/index';
+import { CHANGE_WORD, SOCKET_IO } from '../../helpers/constant';
 
 const router = express.Router();
 
 /* Add new word. */
 router.post('/', (req, res) => {
   const { group, key } = req.body;
+  var socketIo = req.app.get(SOCKET_IO);
 
   const languages = Helper.io.read(Helper.config());
   Object.keys(languages).map((code) => {
@@ -18,7 +20,7 @@ router.post('/', (req, res) => {
   });
 
   Helper.io.write(Helper.config(), languages);
-
+  socketIo.sockets.emit(CHANGE_WORD, key)
   res.send({
     error: 0,
   });

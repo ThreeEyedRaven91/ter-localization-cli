@@ -6,8 +6,10 @@ import {
   CardHeader,
   CardBody,
 } from 'reactstrap';
+import socketIOClient from "socket.io-client";
 import WordTable from "./table";
 import API from '../../apis';
+import { CHANGE_WORD } from '../../../helpers/constant';
 
 class WordScreen extends Component {
   constructor(props) {
@@ -21,7 +23,12 @@ class WordScreen extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getWordData()
+    this.listenSocket()
+  }
+
+  async getWordData() {
     this.setState(prevState => ({
       ...prevState,
       loading: prevState.loading + 1,
@@ -34,6 +41,14 @@ class WordScreen extends Component {
       data,
       loaded: true,
     }));
+  }
+
+  listenSocket() {
+    const { endpoint } = this.state;
+    const socket = socketIOClient(endpoint);
+    socket.on(CHANGE_WORD, (col) => {
+      this.getWordData()
+    })
   }
 
   toggle() {
